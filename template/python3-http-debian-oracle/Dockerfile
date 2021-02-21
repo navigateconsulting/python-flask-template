@@ -9,6 +9,18 @@ ARG ADDITIONAL_PACKAGE
 
 RUN apt-get -qy update && apt-get -qy install ${ADDITIONAL_PACKAGE}
 
+## installing oracle instant client
+RUN apt-get update && apt-get install -y libaio1 wget unzip
+
+WORKDIR /opt/oracle
+RUN wget https://download.oracle.com/otn_software/linux/instantclient/instantclient-basiclite-linuxx64.zip && \
+    unzip instantclient-basiclite-linuxx64.zip && rm -f instantclient-basiclite-linuxx64.zip && \
+    cd /opt/oracle/instantclient* && rm -f *jdbc* *occi* *mysql* *README *jar uidrvci genezi adrci && \
+    echo /opt/oracle/instantclient* > /etc/ld.so.conf.d/oracle-instantclient.conf && ldconfig
+#RUN python -m pip install cx_Oracle
+
+## End installing oracle instant client
+
 # Add non root user
 RUN addgroup --system app && adduser app --system --ingroup app
 RUN chown app /home/app

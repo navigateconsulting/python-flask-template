@@ -1,3 +1,10 @@
+# Adding New Openfaas custom Template for cx_Oracle with Oracle Instant client 
+
+## New templates - 
+- python3-http-debian-oracle
+
+## All Old templates have been removed so that latest versions are pulled from official openfaas repo 
+
 OpenFaaS Python Flask Templates
 =============================================
 
